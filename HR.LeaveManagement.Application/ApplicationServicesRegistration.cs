@@ -1,9 +1,5 @@
-﻿using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using System.Text;
 
 namespace HR.LeaveManagement.Application
 {
@@ -11,8 +7,14 @@ namespace HR.LeaveManagement.Application
     {
         public static IServiceCollection ConfigureApplicationServices(this IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            // Lấy assembly hiện tại
+            var executingAssembly = typeof(ApplicationServicesRegistration).Assembly;
+
+            // THAY ĐỔI Ở ĐÂY: Thêm "cfg => { }," vào trước biến executingAssembly
+            services.AddAutoMapper(cfg => { }, executingAssembly);
+
+            // Cấu hình MediatR (Giữ nguyên vì đã chuẩn bản mới)
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(executingAssembly));
 
             return services;
         }

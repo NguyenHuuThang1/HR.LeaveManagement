@@ -23,7 +23,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllocations.Handlers.Comm
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(DeleteLeaveAllocationCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteLeaveAllocationCommand request, CancellationToken cancellationToken)
         {
             var leaveAllocation = await _unitOfWork.LeaveAllocationRepository.Get(request.Id);
 
@@ -32,7 +32,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllocations.Handlers.Comm
 
             await _unitOfWork.LeaveAllocationRepository.Delete(leaveAllocation);
             await _unitOfWork.Save();
-            return Unit.Value;
+            
         }
     }
 }

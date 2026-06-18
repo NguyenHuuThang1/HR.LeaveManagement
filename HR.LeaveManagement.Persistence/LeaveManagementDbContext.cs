@@ -6,7 +6,7 @@ using System.Text;
 
 namespace HR.LeaveManagement.Persistence
 {
-    public class LeaveManagementDbContext : DbContext
+    public class LeaveManagementDbContext : AuditableDbContext
     {
         public LeaveManagementDbContext(DbContextOptions<LeaveManagementDbContext> options)
             : base(options)

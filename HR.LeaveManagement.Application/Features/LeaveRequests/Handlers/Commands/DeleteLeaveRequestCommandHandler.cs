@@ -22,7 +22,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequests.Handlers.Command
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(DeleteLeaveRequestCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteLeaveRequestCommand request, CancellationToken cancellationToken)
         {
             var leaveRequest = await _unitOfWork.LeaveRequestRepository.Get(request.Id);
 
@@ -31,7 +31,6 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequests.Handlers.Command
 
             await _unitOfWork.LeaveRequestRepository.Delete(leaveRequest);
             await _unitOfWork.Save();
-            return Unit.Value;
         }
     }
 }
